@@ -1,2 +1,56 @@
-<h1>Books#index</h1>
-<p>Find me in app/views/books/index.html.erb</p>
+<div><%= flash[:notice] %></div>
+
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>errors prohibited this obj from being saved:
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+  　<% end %>
+  </ul>
+<% end %>
+
+<h1>Books</h1>
+<% @books.each do |book| %>
+
+<table>
+<thead>
+    <tr>
+      <th>Title</th>
+      <th>Opinion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= book.title %></td>
+      <td><%= book.opinion %></td>
+      <td><%= link_to "Show", book_path(book.id) %></td>
+      <td><%= link_to "Edit", edit_book_path(book.id) %></td>
+      <td><%= link_to "Destroy", books_path(book.id),method: :delete, "data-confirm"=>"本当に消しますか？" %></td>
+    </tr>
+</tbody>
+
+</table>
+
+<% end %>
+
+<h2>User info</h2>
+
+ <p><%= image_tag book.user.get_profile_image(100,100) %></p>
+
+  <p>name<%= book.user.name %></p>
+  <p>introduction<%= book.user.introduction %></p>
+  <div><%= f.submit '設定アイコン' %></div>
+
+<h2>New book</h2>
+
+<%= form_with model: @book,url: 'books', method: :post do |f| %>
+
+<h4>Title</h4>
+<%= f.text_field :title %>
+
+<h4>Opinion</h4>
+<%= f.text_area :opinion %>
+
+<div><%= f.submit 'Create Book' %></div>
+
+<% end %>
