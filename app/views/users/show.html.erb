@@ -1,14 +1,1 @@
-<h1>User info</h1>
-
-<div>
-
-  <%= image_tag @user.get_profile_image(100,100) %>
-  <p>name</p>
-  <h3><%= @user.name %></h3>
-
-  <p>introduction</p>
-  <h3><%= @user.introduction %></h3>
-  <% if @user.id == current_user.id %>
-    <p><%= link_to "設定アイコン",edit_user_path(@user) %></p>
-  <% end %>
-</div>
+<%= render 'left', user: @user, book: @book %>
