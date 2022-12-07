@@ -1,8 +1,9 @@
 <div><%= flash[:notice] %></div>
 
-<h1>User info</h1>
+<div class = "col-md-3">
+  <h1>User info</h1>
 
-<div>
+
 
   <%= image_tag user.get_profile_image(100,100) %>
   <table class = "table">
@@ -19,10 +20,16 @@
   </table>
 
   <% if user.id == current_user.id %>
-    <p><%= link_to "設定アイコン",edit_user_path(user) %></p>
+    <div class="row">
+      <button type="button" class="btn btn-outline-secondary">
+        <%= link_to edit_user_path(user) do %>
+          <i class="fa-solid fa-user-gear" style="color:dark;"></i>
+        <% end %>
+      </button>
+    </div>
   <% end %>
-</div>
 
+</div>
 
 
 <h2>New book</h2>
