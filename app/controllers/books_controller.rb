@@ -8,6 +8,8 @@ class BooksController < ApplicationController
     else
       @books = Book.all
       @user = current_user
+      @book = Book.new(book_params)
+      @book.save
       render :index
     end
   end
